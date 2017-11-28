@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/chat',function (){
+  return view('chat');
+})->middleware('auth');
+
+//Route::get('/messages', function () {
+//    return App\Message::with('user')->get();
+//})->middleware('auth');
+Auth::routes();
+
+Route::get('/messages', 'MessageController@getMessage')->middleware('auth');
+
+Route::post('/messages', 'MessageController@postMessage')->middleware('auth');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
